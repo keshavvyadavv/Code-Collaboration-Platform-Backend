@@ -30,8 +30,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-    	
-    	// CRITICAL: Skip JWT logic completely for public endpoints
+
         String uri = request.getRequestURI();
         if (uri.contains("/api/auth/login") || uri.contains("/api/auth/register")) {
             filterChain.doFilter(request, response);

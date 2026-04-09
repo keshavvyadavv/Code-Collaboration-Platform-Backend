@@ -3,6 +3,7 @@ package com.userservice.service.implementation;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +24,7 @@ import com.userservice.exceptionhandler.UsernameAlreadyExistsException;
 import com.userservice.repository.UserRepository;
 import com.userservice.service.AuthService;
 
+@Slf4j
 @Service
 public class AuthServiceImpl implements AuthService {
 	
@@ -145,7 +147,7 @@ public class AuthServiceImpl implements AuthService {
 
 	    User user = userRepository.findById(userId)
 	            .orElseThrow(() -> new UserNotFoundException("User not found of this userID"));
-
+		log.info("Updating name");
 	   
 	    if (dto.getFullName() != null) {
 	        user.setFullName(dto.getFullName());

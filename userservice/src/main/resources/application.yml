@@ -1,32 +1,55 @@
+server:
+  port: 8080
 
-spring.application.name=auth-service
-#tell Spring to Load .env file also
-spring.config.import=optional:file:.env[.properties]
+spring:
+  application:
+    name: auth-service
 
-spring.datasource.url=jdbc:mysql://localhost:3306/user
-spring.datasource.username=root
-spring.datasource.password=keshav
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-logging.level.org.springframework.security=DEBUG
-logging.level.com.codesync.auth=DEBUG
+#  config:
+#    import: "optional:file:.env[.properties]"
 
-#logging feature help in debug issue 
-logging.level.org.springframework.security.oauth2=DEBUG
-logging.level.org.springframework.boot.autoconfigure.security=DEBUG
-# GitHub OAuth2
-spring.security.oauth2.client.registration.github.client-id=${GITHUB_CLIENT_ID}
-spring.security.oauth2.client.registration.github.client-secret=${GITHUB_CLIENT_SECRET}
+  datasource:
+    url: jdbc:mysql://localhost:3306/users
+    username: root
+    password: keshav
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-# Google Oauth
-spring.security.oauth2.client.registration.google.client-id=${GOOGLE_CLIENT_ID}
-spring.security.oauth2.client.registration.google.client-secret=${GOOGLE_CLIENT_SECRET}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
-#reset password using Email
-spring.mail.host=smtp.gmail.com
-spring.mail.port=587
-spring.mail.username=${MAIL_USERNAME}
-spring.mail.password=${MAIL_PASSWORD}
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.starttls.enable=true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.codesync.auth: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.boot.autoconfigure.security: DEBUG
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
