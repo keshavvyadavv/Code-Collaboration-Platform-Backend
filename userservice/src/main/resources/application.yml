@@ -49,7 +49,7 @@ logging:
     org.springframework.security.oauth2: DEBUG
     org.springframework.boot.autoconfigure.security: DEBUG
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka

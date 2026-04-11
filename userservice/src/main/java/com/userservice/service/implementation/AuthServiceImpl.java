@@ -108,7 +108,6 @@ public class AuthServiceImpl implements AuthService {
 	//it is kept if we have to blackList some user then we can store the token in db and then do the coding to remove them here
 	@Override
 	public void logout(String token) {
-		// TODO Auto-generated method stub
 		
 	}
 

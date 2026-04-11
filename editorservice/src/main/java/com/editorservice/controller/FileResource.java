@@ -33,7 +33,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping
-    public ResponseEntity<CodeFile> create(@Valid @RequestBody CodeFileRequest request) {
+    public ResponseEntity<CodeFileResponse> create(@Valid @RequestBody CodeFileRequest request) {
         CodeFile codeFile = CodeFile.builder()
                 .projectId(request.getProjectId())
                 .name(request.getName())
@@ -55,7 +55,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping("/folder")
-    public ResponseEntity<CodeFile> createFolder(@Valid @RequestBody CreateFolderRequest request) {
+    public ResponseEntity<CodeFileResponse> createFolder(@Valid @RequestBody CreateFolderRequest request) {
         return ResponseEntity.ok(
                 fileService.createFolder(
                         request.getProjectId(),
@@ -73,7 +73,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<CodeFile> getById(@PathVariable Integer id) {
+    public ResponseEntity<CodeFileResponse> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(fileService.getFileById(id));
     }
 
@@ -84,7 +84,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/project/{projectId}")
-    public ResponseEntity<List<CodeFile>> getByProject(@PathVariable Integer projectId) {
+    public ResponseEntity<List<CodeFileResponse>> getByProject(@PathVariable Integer projectId) {
         return ResponseEntity.ok(fileService.getFilesByProject(projectId));
     }
 
@@ -107,7 +107,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PutMapping("/{id}/content")
-    public ResponseEntity<CodeFile> updateContent(@PathVariable Integer id,
+    public ResponseEntity<CodeFileResponse> updateContent(@PathVariable Integer id,
                                                   @Valid @RequestBody UpdateContentRequest request) {
         return ResponseEntity.ok(
                 fileService.updateFileContent(id, request.getContent(), request.getUserId())
@@ -122,7 +122,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PutMapping("/{id}/rename")
-    public ResponseEntity<CodeFile> rename(@PathVariable Integer id,
+    public ResponseEntity<CodeFileResponse> rename(@PathVariable Integer id,
                                            @Valid @RequestBody RenameFileRequest request) {
         return ResponseEntity.ok(fileService.renameFile(id, request.getNewName()));
     }
@@ -135,7 +135,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PutMapping("/{id}/move")
-    public ResponseEntity<CodeFile> move(@PathVariable Integer id,
+    public ResponseEntity<CodeFileResponse> move(@PathVariable Integer id,
                                          @Valid @RequestBody MoveFileRequest request) {
         return ResponseEntity.ok(fileService.moveFile(id, request.getNewPath()));
     }
@@ -159,7 +159,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PostMapping("/{id}/restore")
-    public ResponseEntity<CodeFile> restore(@PathVariable Integer id) {
+    public ResponseEntity<CodeFileResponse> restore(@PathVariable Integer id) {
         return ResponseEntity.ok(fileService.restoreFile(id));
     }
 
@@ -170,7 +170,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/project/{projectId}/tree")
-    public ResponseEntity<List<CodeFile>> getTree(@PathVariable Integer projectId) {
+    public ResponseEntity<List<CodeFileResponse>> getTree(@PathVariable Integer projectId) {
         return ResponseEntity.ok(fileService.getFileTree(projectId));
     }
 
@@ -182,7 +182,7 @@ public class FileResource {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @GetMapping("/project/{projectId}/search")
-    public ResponseEntity<List<CodeFile>> search(@PathVariable Integer projectId,
+    public ResponseEntity<List<CodeFileResponse >> search(@PathVariable Integer projectId,
                                                  @RequestParam String keyword) {
         return ResponseEntity.ok(fileService.searchInProject(projectId, keyword));
     }

@@ -1,32 +1,34 @@
 package com.editorservice.service;
 
+import com.editorservice.dto.CodeFileRequest;
+import com.editorservice.dto.CodeFileResponse;
 import com.editorservice.entity.CodeFile;
 
 import java.util.List;
 
 public interface FileService {
 
-    CodeFile createFile(CodeFile codeFile);
+    CodeFileResponse createFile(CodeFile codeFile);
 
-    CodeFile getFileById(Integer fileId);
+    CodeFileResponse getFileById(Integer fileId);
 
-    List<CodeFile> getFilesByProject(Integer projectId);
+    List<CodeFileResponse> getFilesByProject(Integer projectId);
 
     String getFileContent(Integer fileId);
 
-    CodeFile updateFileContent(Integer fileId, String content, Integer userId);
+    CodeFileResponse updateFileContent(Integer fileId, String content, Integer userId);
 
-    CodeFile renameFile(Integer fileId, String newName);
+    CodeFileResponse renameFile(Integer fileId, String newName);
 
     void deleteFile(Integer fileId);
 
-    CodeFile restoreFile(Integer fileId);
+    CodeFileResponse restoreFile(Integer fileId);
 
-    CodeFile moveFile(Integer fileId, String newPath);
+    CodeFileResponse moveFile(Integer fileId, String newPath);
 
-    CodeFile createFolder(Integer projectId, String folderName, String path, Integer createdById);
+    CodeFileResponse createFolder(Integer projectId, String folderName, String path, Integer createdById);
 
-    List<CodeFile> getFileTree(Integer projectId);
+    List<CodeFileResponse> getFileTree(Integer projectId);
 
-    List<CodeFile> searchInProject(Integer projectId, String keyword);
+    List<CodeFileResponse> searchInProject(Integer projectId, String keyword);
 }
